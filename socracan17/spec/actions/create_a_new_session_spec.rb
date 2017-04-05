@@ -8,7 +8,7 @@ describe "Create a new Session Action" do
   it 'creates a new session' do
     action = SocraCan17::Actions::CreateANewSession.new
 
-    session = action.execute(a_title, a_facilitator, a_datetime, a_place, a_description)
+    session = action.execute(title: a_title, facilitator: a_facilitator, datetime: a_datetime, place: a_place, description: a_description)
 
     expect(session.title).to eq(a_title)
     expect(session.facilitator).to eq(a_facilitator)

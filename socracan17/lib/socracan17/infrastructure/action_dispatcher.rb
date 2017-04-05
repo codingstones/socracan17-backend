@@ -10,7 +10,7 @@ module SocraCan17
       end
 
       def dispatch(action, args)
-        @actions[action].execute(*args)
+        @actions[action].execute(args)
       end
     end
   end
