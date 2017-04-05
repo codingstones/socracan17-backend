@@ -1,5 +1,5 @@
 require "socracan17/version"
 
-module Socracan17
-  # Your code goes here...
-end
+require "socracan17/model/session/session"
+
+require "socracan17/actions/session_actions"
