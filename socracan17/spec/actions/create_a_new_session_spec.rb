@@ -1,11 +1,11 @@
 describe "Create a new Session Action" do
-  it 'creates a new session' do
-    a_title = 'irrelevant title'
-    a_facilitator = 'irrelevant facilitator'
-    a_datetime = 'irrelevant date'
-    a_place = 'irrelevant place'
-    a_description = 'irrelevant description'
+  let(:a_title) {'irrelevant title'}
+  let(:a_facilitator) {'irrelevant facilitator'}
+  let(:a_datetime) {'irrelevant date'}
+  let(:a_place) {'irrelevant place'}
+  let(:a_description) {'irrelevant description'}
 
+  it 'creates a new session' do
     action = SocraCan17::Actions::CreateANewSession.new
 
     session = action.execute(a_title, a_facilitator, a_datetime, a_place, a_description)
