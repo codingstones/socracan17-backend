@@ -12,13 +12,13 @@ describe SocraCan17::Infrastructure::ActionDispatcher do
 
     @action_dispatcher.dispatch(action_name, parameters)
 
-    expect(@action).to have_received(:execute).with(parameters)
+    expect(@action).to have_received(:execute).with(*parameters)
   end
 end
 
 
 class DummyAction
-  def execute(arg1:, arg2:)
+  def execute(arg1, arg2)
 
   end
 end
