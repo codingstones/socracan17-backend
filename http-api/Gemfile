@@ -5,6 +5,7 @@ gem 'socracan17', path: '../socracan17'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'grape-entity'
 
 group :development do
   gem "bundler", "~> 1.14"
