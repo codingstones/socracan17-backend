@@ -12,14 +12,13 @@ describe 'POST /services' do
   end
 
   before(:each) do
-    #FIXME: Jodido guarro ...
-    SocraCan17::Actions::ACTION_DISPATCHER = instance_spy(SocraCan17::Infrastructure::ActionDispatcher)
+    SocraCan17::Actions::action_dispatcher = instance_spy(SocraCan17::Infrastructure::ActionDispatcher)
 
     post '/services', build_json_rpc_request(action_name, params)
   end
 
   it 'uses SocraCan17 action dispatcher for dispatching commands on HTTP API' do
-    expect(SocraCan17::Actions::ACTION_DISPATCHER).to have_received(:dispatch).with(:create_a_new_session, params)
+    expect(SocraCan17::Actions::action_dispatcher).to have_received(:dispatch).with(:create_a_new_session, params)
   end
 
   context "when returning a value" do

@@ -11,7 +11,7 @@ post '/services' do
 
   args = Hash[body["params"].map { |key, value| [key.to_sym, value] }]
 
-  SocraCan17::Actions::ACTION_DISPATCHER.dispatch(body["method"].to_sym, args)
+  SocraCan17::Actions.action_dispatcher.dispatch(body["method"].to_sym, args)
 
   json \
     "jsonrpc" => "2.0",

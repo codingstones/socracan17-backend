@@ -1,7 +1,17 @@
 module SocraCan17
   module Actions
-    ACTION_DISPATCHER = Infrastructure::ActionDispatcher.new
+    def self.action_dispatcher
+      @@action_dispatcher ||= Infrastructure::ActionDispatcher.new
+    end
 
-    ACTION_DISPATCHER.add_action(:create_a_new_session, CreateANewSession.new)
+    def self.action_dispatcher=(value)
+      @@action_dispatcher = value
+    end
+
+    def self.initialize
+      action_dispatcher.add_action(:create_a_new_session, CreateANewSession.new)
+    end
+
+    initialize
   end
 end
