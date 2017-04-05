@@ -13,7 +13,7 @@ describe 'POST /services' do
 
   before(:each) do
     SocraCan17::Actions::action_dispatcher = instance_spy(SocraCan17::Infrastructure::ActionDispatcher)
-    allow(SocraCan17::Actions::action_dispatcher).to receive(:dispatch).with(:create_a_new_session, params)
+    allow(SocraCan17::Actions::action_dispatcher).to receive(:dispatch).with(:create_a_new_session, params).and_return(SocraCan17::Session.new(title: 'irrelevant title'))
 
     post '/services', build_json_rpc_request(action_name, params)
   end
