@@ -1,19 +1,25 @@
 describe 'POST /services' do
-  before(:each) do
-    @id = 30
-    request = build_json_rpc_request(:create_a_new_session, {
+  let(:id) { 30 }
+  let(:action_name) { :create_a_new_session }
+  let(:params) do
+    {
       :title => 'Commands Surfing to Server',
       :facilitator => 'Alberto Gualis & Néstor Salceda',
       :datetime => 'Tomorrow',
       :place => 'Beach',
       :description => 'We will see how commands flow to server'
-    }, id: @id)
+    }
+  end
 
-    post '/services', request
+  before(:each) do
+    #FIXME: Jodido guarro ...
+    SocraCan17::Actions::ACTION_DISPATCHER = instance_spy(SocraCan17::Infrastructure::ActionDispatcher)
+
+    post '/services', build_json_rpc_request(action_name, params)
   end
 
   it 'uses SocraCan17 action dispatcher for dispatching commands on HTTP API' do
-    expect(last_response).to be_ok
+    expect(SocraCan17::Actions::ACTION_DISPATCHER).to have_received(:dispatch).with(:create_a_new_session, params)
   end
 
   context "when returning a value" do
@@ -26,13 +32,17 @@ describe 'POST /services' do
 
       expect(body).to include('jsonrpc' => '2.0')
       expect(body).to include('result')
-      expect(body).to include('id' => @id)
+      expect(body).to include('id' => id)
+    end
+
+    it 'returns ok if everything goes well' do
+      expect(last_response).to be_ok
     end
   end
 end
 
-def build_json_rpc_request(method, params, id: nil)
-  request = { jsonrpc: "2.0", method: method, params: params, id: id || rand(1000) }
+def build_json_rpc_request(method, params)
+  request = { jsonrpc: "2.0", method: method, params: params, id: id }
 
   JSON.dump(request)
 end
