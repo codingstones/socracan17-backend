@@ -5,15 +5,25 @@ describe "Create a new Session Action" do
   let(:a_place) {'irrelevant place'}
   let(:a_description) {'irrelevant description'}
 
+  before(:each) do
+    @domain_event_publisher = instance_spy(SocraCan17::Infrastructure::DomainEventPublisher)
+    @action = SocraCan17::Actions::CreateANewSession.new(@domain_event_publisher)
+  end
+
   it 'creates a new session' do
-    action = SocraCan17::Actions::CreateANewSession.new
-
-    session = action.execute(title: a_title, facilitator: a_facilitator, datetime: a_datetime, place: a_place, description: a_description)
-
+    session = @action.execute(title: a_title, facilitator: a_facilitator, datetime: a_datetime, place: a_place, description: a_description)
     expect(session.title).to eq(a_title)
     expect(session.facilitator).to eq(a_facilitator)
     expect(session.datetime).to eq(a_datetime)
     expect(session.place).to eq(a_place)
     expect(session.description).to eq(a_description)
+  end
+
+  it 'publishes a creation event' do
+    @action.execute(title: a_title, facilitator: a_facilitator, datetime: a_datetime, place: a_place, description: a_description)
+
+    expect(@domain_event_publisher).to have_received(:publish).with(have_attributes(
+      name: 'session.created'
+    ))
   end
 end

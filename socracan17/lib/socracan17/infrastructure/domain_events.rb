@@ -1,5 +1,3 @@
-require 'logger'
-
 module SocraCan17
   module Infrastructure
     class DomainEventPublisher
