@@ -2,6 +2,8 @@ PATH
   remote: ../socracan17
   specs:
     socracan17 (0.1.0)
+      bunny
+      oj
 
 GEM
   remote: https://rubygems.org/
@@ -11,7 +13,10 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    amq-protocol (2.1.0)
     backports (3.7.0)
+    bunny (2.6.4)
+      amq-protocol (>= 2.0.1)
     concurrent-ruby (1.0.5)
     diff-lcs (1.3)
     grape-entity (0.6.1)
@@ -20,6 +25,7 @@ GEM
     i18n (0.8.1)
     minitest (5.10.1)
     multi_json (1.12.1)
+    oj (2.18.5)
     rack (1.6.5)
     rack-protection (1.5.3)
       rack
