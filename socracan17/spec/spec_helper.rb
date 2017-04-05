@@ -1,4 +1,5 @@
 require "bundler/setup"
+require "json"
 require "socracan17"
 
 RSpec.configure do |config|
