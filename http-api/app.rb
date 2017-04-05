@@ -1,9 +1,20 @@
 require 'sinatra'
+require 'sinatra/json'
+
+require 'json'
+
 require 'socracan17'
 
 
 post '/services' do
-  args = Hash[params["params"].map { |key, value| [key.to_sym, value] }]
+  body = JSON.load(request.body)
 
-  SocraCan17::Actions::ACTION_DISPATCHER.dispatch(params["method"].to_sym, args)
+  args = Hash[body["params"].map { |key, value| [key.to_sym, value] }]
+
+  SocraCan17::Actions::ACTION_DISPATCHER.dispatch(body["method"].to_sym, args)
+
+  json \
+    "jsonrpc" => "2.0",
+    "result" => {},
+    "id" => body["id"]
 end
