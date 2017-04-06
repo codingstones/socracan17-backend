@@ -10,7 +10,11 @@ module SocraCan17
       end
 
       def dispatch(action, args)
-        @actions[action].execute(args)
+        if args.empty?
+          @actions[action].execute
+        else
+          @actions[action].execute(args)
+        end
       end
     end
   end

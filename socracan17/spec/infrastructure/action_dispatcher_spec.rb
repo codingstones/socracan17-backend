@@ -14,11 +14,28 @@ describe SocraCan17::Infrastructure::ActionDispatcher do
 
     expect(@action).to have_received(:execute).with(parameters)
   end
+
+  context "when action does not have any params" do
+    it "calls action without any parameters" do
+      action = instance_spy(DummyActionWithoutParameters)
+      @action_dispatcher.add_action(action_name, action)
+
+      @action_dispatcher.dispatch(action_name, {})
+
+      expect(action).to have_received(:execute)
+    end
+  end
 end
 
 
 class DummyAction
   def execute(arg1:, arg2:)
+
+  end
+end
+
+class DummyActionWithoutParameters
+  def execute
 
   end
 end
