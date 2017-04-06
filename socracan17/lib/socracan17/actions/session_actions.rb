@@ -29,5 +29,15 @@ module SocraCan17
         @domain_event_publisher.publish(Infrastructure::DomainEvent.new('session.created', Time.now.utc, event_data))
       end
     end
+
+    class RetrieveAllSessions
+      def initialize(session_repository)
+        @session_repository = session_repository
+      end
+
+      def execute
+        @session_repository.all
+      end
+    end
   end
 end
