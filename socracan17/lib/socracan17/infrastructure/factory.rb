@@ -22,4 +22,12 @@ module SocraCan17
       end
     end
   end
+
+  module Repositories
+    class Factory
+      def session_repository
+        @session_repository ||= SessionRepository.new
+      end
+    end
+  end
 end
