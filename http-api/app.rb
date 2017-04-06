@@ -11,7 +11,11 @@ require_relative 'presenters'
 post '/services' do
   body = JSON.load(request.body)
 
-  args = Hash[body["params"].map { |key, value| [key.to_sym, value] }]
+  if body.include? "params"
+    args = Hash[body["params"].map { |key, value| [key.to_sym, value] }]
+  else
+    args = []
+  end
   result = SocraCan17::Actions.action_dispatcher.dispatch(body["method"].to_sym, args)
 
   json \
