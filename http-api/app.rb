@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/json'
+require 'rack/cors'
 
 require 'json'
 
@@ -7,6 +8,12 @@ require 'socracan17'
 
 require_relative 'presenters'
 
+use Rack::Cors do
+  allow do
+    origins '*'
+    resource '*', headers: :any, methods: :any
+  end
+end
 
 post '/services' do
   body = JSON.load(request.body)

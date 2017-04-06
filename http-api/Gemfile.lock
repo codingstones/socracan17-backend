@@ -27,6 +27,7 @@ GEM
     multi_json (1.12.1)
     oj (2.18.5)
     rack (1.6.5)
+    rack-cors (0.4.1)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -67,6 +68,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.14)
   grape-entity
+  rack-cors
   rack-test (~> 0.6)
   rake (~> 10.0)
   rspec (~> 3.0)
