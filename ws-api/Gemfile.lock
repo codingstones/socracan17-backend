@@ -1,0 +1,33 @@
+PATH
+  remote: ../socracan17
+  specs:
+    socracan17 (0.1.0)
+      bunny
+      oj
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    amq-protocol (2.1.0)
+    bunny (2.6.4)
+      amq-protocol (>= 2.0.1)
+    eventmachine (1.2.3)
+    oj (2.18.5)
+    websocket (1.2.4)
+    websocket-eventmachine-base (1.2.0)
+      eventmachine (~> 1.0)
+      websocket (~> 1.0)
+      websocket-native (~> 1.0)
+    websocket-eventmachine-server (1.0.1)
+      websocket-eventmachine-base (~> 1.0)
+    websocket-native (1.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  socracan17!
+  websocket-eventmachine-server
+
+BUNDLED WITH
+   1.14.6
