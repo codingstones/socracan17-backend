@@ -25,8 +25,14 @@ post '/services' do
 end
 
 def present(result)
-  presenter_name = result.class.name.split('::')[-1]
+  if result.kind_of? Array
+    return [] if result.empty?
+    presenter_name = result[0].class.name.split('::')[-1]
+  else
+    presenter_name = result.class.name.split('::')[-1]
+  end
+
   presenter = Kernel.const_get(presenter_name)
 
-  presenter.represent(result).serializable_hash
+  presenter.represent(result)
 end
