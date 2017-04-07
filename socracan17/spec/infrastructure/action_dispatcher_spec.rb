@@ -7,7 +7,7 @@ describe SocraCan17::Infrastructure::ActionDispatcher do
     @action_dispatcher.add_action(action_name, @action)
   end
 
-  it "executes chosen action with specified parameters" do
+  it "executes chosen action with keywords parameters" do
     parameters = { :arg1 => 1, :arg2 => 'other argument' }
 
     @action_dispatcher.dispatch(action_name, parameters)
@@ -23,6 +23,13 @@ describe SocraCan17::Infrastructure::ActionDispatcher do
       @action_dispatcher.dispatch(action_name, {})
 
       expect(action).to have_received(:execute)
+    end
+  end
+
+  context "when action is not found" do
+    it "raises an error" do
+      non_existent_action_name = :non_existent_action_name
+      expect { @action_dispatcher.dispatch(non_existent_action_name, {}) }.to raise_error(SocraCan17::Infrastructure::ActionNotFoundError)
     end
   end
 end
