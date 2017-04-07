@@ -19,7 +19,7 @@ end
 
 EM.run do
   WebSocket::EventMachine::Server.start(:host => "0.0.0.0", :port => 9000) do |ws|
-    subscriber.subscribe('session.created', 'session.created', BroadcastDomainEventProcessor.new(ws))
+    EM.defer { subscriber.subscribe('session.created', 'session.created', BroadcastDomainEventProcessor.new(ws)) }
 
     ws.onopen do
       puts "Client connected"
