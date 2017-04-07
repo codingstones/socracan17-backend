@@ -1,3 +1,4 @@
+require 'oj'
 require 'sinatra'
 require 'sinatra/json'
 require 'rack/cors'

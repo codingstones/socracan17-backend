@@ -68,6 +68,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.14)
   grape-entity
+  oj
   rack-cors
   rack-test (~> 0.6)
   rake (~> 10.0)
