@@ -2,10 +2,9 @@ require 'sinatra'
 require 'sinatra/json'
 require 'rack/cors'
 
-require 'json'
-
 require 'socracan17'
 
+require_relative 'jsonrpc'
 require_relative 'presenters'
 
 use Rack::Cors do
@@ -16,20 +15,13 @@ use Rack::Cors do
 end
 
 post '/services' do
-  body = JSON.load(request.body)
+  jsonrpc_request = parse_jsonrpc_request(request)
 
-  if body.include? "params"
-    args = Hash[body["params"].map { |key, value| [key.to_sym, value] }]
-  else
-    args = []
-  end
-  result = SocraCan17::Actions.action_dispatcher.dispatch(body["method"].to_sym, args)
+  result = SocraCan17::Actions.action_dispatcher.dispatch(jsonrpc_request.method, jsonrpc_request.params)
 
-  json \
-    "jsonrpc" => "2.0",
-    "result" => present(result),
-    "id" => body["id"]
+  json jsonrpc_response(present(result), jsonrpc_request.id)
 end
+
 
 def present(result)
   if result.kind_of? Array
