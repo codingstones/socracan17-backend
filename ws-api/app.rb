@@ -13,13 +13,17 @@ class BroadcastDomainEventProcessor < SocraCan17::Infrastructure::DomainEventPro
   end
 
   def process(event)
-    @websocket.send(JSON.dump(event))
+    EM.next_tick do
+      @websocket.send(JSON.dump(event))
+    end
   end
 end
 
 EM.run do
   WebSocket::EventMachine::Server.start(:host => "0.0.0.0", :port => 9000) do |ws|
-    EM.defer { subscriber.subscribe('session.created', 'session.created', BroadcastDomainEventProcessor.new(ws)) }
+    EM.defer do
+      subscriber.subscribe('session.created', 'session.created', BroadcastDomainEventProcessor.new(ws))
+    end
 
     ws.onopen do
       puts "Client connected"
