@@ -12,8 +12,16 @@ module SocraCan17
     end
 
     def self.initialize
-      action_dispatcher.add_action(:create_a_new_session, CreateANewSession.new(@@repository_factory.session_repository, @@infrastructure_factory.domain_event_publisher))
-      action_dispatcher.add_action(:retrieve_all_sessions, RetrieveAllSessions.new(@@repository_factory.session_repository))
+      action_dispatcher.add_action(:create_a_new_session,
+        CreateANewSession.new(
+          @@repository_factory.session_repository,
+          @@infrastructure_factory.domain_event_publisher
+        )
+      )
+
+      action_dispatcher.add_action(:retrieve_all_sessions,
+        RetrieveAllSessions.new(@@repository_factory.session_repository)
+      )
     end
 
     initialize
