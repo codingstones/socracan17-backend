@@ -1,0 +1,1 @@
+http POST  http://localhost:4567/services jsonrpc=2.0 method=create_a_new_session id=30 params:=@params.json
