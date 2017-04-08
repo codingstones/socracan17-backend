@@ -31,6 +31,7 @@ describe "Create a new Session Action" do
 
   it 'saves session' do
     session = @action.execute(title: a_title, facilitator: a_facilitator, datetime: a_datetime, place: a_place, description: a_description)
+
     expect(@session_repository).to have_received(:put).with(session)
   end
 end

@@ -1,11 +1,13 @@
 describe SocraCan17::Repositories::SessionRepository do
+  before(:each) do
+    @repository = SocraCan17::Repositories::SessionRepository.new
+  end
+
   it "store a session" do
-    repository = SocraCan17::Repositories::SessionRepository.new
     session = SocraCan17::Session.new(title: 'Irrelevant title')
-    repository.put(session)
 
-    retrieved = repository.all()
+    @repository.put(session)
 
-    expect(retrieved).to eq([session])
+    expect(@repository.all()).to eq([session])
   end
 end
