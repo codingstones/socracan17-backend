@@ -1,10 +1,12 @@
+require 'action_dispatcher'
+
 module SocraCan17
   module Actions
     @@infrastructure_factory = Infrastructure::Factory.new
     @@repository_factory = Repositories::Factory.new
 
     def self.action_dispatcher
-      @@action_dispatcher ||= Infrastructure::ActionDispatcher.new
+      @@action_dispatcher ||= ActionDispatcher::Dispatcher.new
     end
 
     def self.action_dispatcher=(value)

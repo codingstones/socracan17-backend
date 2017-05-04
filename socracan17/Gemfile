@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
 
+gem "action_dispatcher", git: 'https://github.com/codingstones/action_dispatcher'
+
 # Specify your gem's dependencies in socracan17.gemspec
 gemspec

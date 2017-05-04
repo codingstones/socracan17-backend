@@ -6,7 +6,7 @@ module SocraCan17
         @domain_event_publisher = domain_event_publisher
       end
 
-      def execute(title:, facilitator:, datetime:, place:, description:)
+      def execute(title, facilitator, datetime, place, description)
         session = Session.new(title: title, facilitator: facilitator, datetime: datetime, place: place, description: description)
 
         @session_repository.put(session)

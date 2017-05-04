@@ -13,7 +13,7 @@ describe "Create a new Session Action" do
   end
 
   it 'creates a new session' do
-    session = @action.execute(title: a_title, facilitator: a_facilitator, datetime: a_datetime, place: a_place, description: a_description)
+    session = @action.execute(a_title, a_facilitator, a_datetime, a_place, a_description)
     expect(session.title).to eq(a_title)
     expect(session.facilitator).to eq(a_facilitator)
     expect(session.datetime).to eq(a_datetime)
@@ -22,7 +22,7 @@ describe "Create a new Session Action" do
   end
 
   it 'publishes a creation event' do
-    @action.execute(title: a_title, facilitator: a_facilitator, datetime: a_datetime, place: a_place, description: a_description)
+    @action.execute(a_title, a_facilitator, a_datetime, a_place, a_description)
 
     expect(@domain_event_publisher).to have_received(:publish).with(have_attributes(
       name: 'session.created'
@@ -30,7 +30,7 @@ describe "Create a new Session Action" do
   end
 
   it 'saves session' do
-    session = @action.execute(title: a_title, facilitator: a_facilitator, datetime: a_datetime, place: a_place, description: a_description)
+    session = @action.execute(a_title, a_facilitator, a_datetime, a_place, a_description)
 
     expect(@session_repository).to have_received(:put).with(session)
   end
