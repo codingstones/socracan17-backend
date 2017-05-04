@@ -5,7 +5,7 @@ require 'rack/cors'
 
 require 'socracan17'
 
-require_relative 'jsonrpc'
+require 'jsonrpc'
 require_relative 'presenters'
 
 use Rack::Cors do
@@ -15,12 +15,20 @@ use Rack::Cors do
   end
 end
 
+handler = JsonRPC::Handler.new(JsonRPC::Parser.new)
+
 post '/services' do
-  jsonrpc_request = parse_jsonrpc_request(request)
-
-  result = SocraCan17::Actions.action_dispatcher.dispatch(jsonrpc_request.method, jsonrpc_request.params)
-
-  json jsonrpc_response(present(result), jsonrpc_request.id)
+  response = handler.handle(request.body) do |jsonrpc_request|
+    begin
+      result = SocraCan17::Actions.action_dispatcher.execute(jsonrpc_request.method.to_sym, jsonrpc_request.params)
+      present(result)
+    rescue ActionDispatcher::ArgumentError
+      raise JsonRPC::InvalidParamsError
+    rescue ActionDispatcher::ActionNotFoundError
+      raise JsonRPC::MethodNotFoundError
+    end
+  end
+  json response
 end
 
 

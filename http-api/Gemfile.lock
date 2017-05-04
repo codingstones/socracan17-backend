@@ -1,7 +1,22 @@
+GIT
+  remote: https://github.com/codingstones/action_dispatcher
+  revision: 370847fa188fe6669a13d06c7cf2185077a0d0b6
+  specs:
+    action_dispatcher (0.1.0)
+
+GIT
+  remote: https://github.com/codingstones/jsonrpc
+  revision: c0934261996fcdf39be3c157a2a3777dc3b6cfc1
+  specs:
+    jsonrpc (0.1.0)
+      dry-validation
+      multi_json (~> 1.12)
+
 PATH
   remote: ../socracan17
   specs:
     socracan17 (0.1.0)
+      action_dispatcher
       bunny
       oj
 
@@ -19,10 +34,38 @@ GEM
       amq-protocol (>= 2.0.1)
     concurrent-ruby (1.0.5)
     diff-lcs (1.3)
+    dry-configurable (0.7.0)
+      concurrent-ruby (~> 1.0)
+    dry-container (0.6.0)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.1, >= 0.1.3)
+    dry-core (0.2.4)
+      concurrent-ruby (~> 1.0)
+    dry-equalizer (0.2.0)
+    dry-logic (0.4.1)
+      dry-container (~> 0.2, >= 0.2.6)
+      dry-core (~> 0.2)
+      dry-equalizer (~> 0.2)
+    dry-types (0.10.2)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.1)
+      dry-container (~> 0.3)
+      dry-core (~> 0.2, >= 0.2.1)
+      dry-equalizer (~> 0.2)
+      dry-logic (~> 0.4, >= 0.4.0)
+      inflecto (~> 0.0.0, >= 0.0.2)
+    dry-validation (0.10.6)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.1, >= 0.1.3)
+      dry-core (~> 0.2, >= 0.2.1)
+      dry-equalizer (~> 0.2)
+      dry-logic (~> 0.4, >= 0.4.0)
+      dry-types (~> 0.9, >= 0.9.0)
     grape-entity (0.6.1)
       activesupport (>= 5.0.0)
       multi_json (>= 1.3.2)
     i18n (0.8.1)
+    inflecto (0.0.2)
     minitest (5.10.1)
     multi_json (1.12.1)
     oj (2.18.5)
@@ -66,8 +109,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  action_dispatcher!
   bundler (~> 1.14)
   grape-entity
+  jsonrpc!
   oj
   rack-cors
   rack-test (~> 0.6)

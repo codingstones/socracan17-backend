@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 source "https://rubygems.org"
 
+gem 'action_dispatcher', git: 'https://github.com/codingstones/action_dispatcher'
+gem 'jsonrpc', git: 'https://github.com/codingstones/jsonrpc'
 gem 'socracan17', path: '../socracan17'
 
 gem 'sinatra'
