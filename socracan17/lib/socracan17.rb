@@ -9,5 +9,6 @@ require "socracan17/infrastructure/factory"
 require "socracan17/model/session/session"
 require "socracan17/model/session/repositories"
 
+require "socracan17/actions/action"
 require "socracan17/actions/session_actions"
 require "socracan17/actions/action_dispatcher"

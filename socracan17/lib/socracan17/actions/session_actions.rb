@@ -1,13 +1,19 @@
+require 'dry-validation'
+
 module SocraCan17
   module Actions
-    class CreateANewSession
+    class CreateANewSession < ActionWithValidation
       def initialize(session_repository, domain_event_publisher)
         @session_repository = session_repository
         @domain_event_publisher = domain_event_publisher
       end
 
-      def execute(title, facilitator, datetime, place, description)
-        session = Session.new(title: title, facilitator: facilitator, datetime: datetime, place: place, description: description)
+      def validate(params)
+        CreateANewSessionSchema.call(params)
+      end
+
+      def do_execute(params)
+        session = Session.new(params)
 
         @session_repository.put(session)
         build_and_publish_created_event(session)
@@ -27,6 +33,14 @@ module SocraCan17
         }
 
         @domain_event_publisher.publish(Infrastructure::DomainEvent.new('session.created', Time.now.utc, event_data))
+      end
+
+      CreateANewSessionSchema = Dry::Validation.Schema do
+        required(:title).filled
+        required(:facilitator).filled
+        required(:datetime).filled
+        required(:place).filled
+        required(:description).filled
       end
     end
 

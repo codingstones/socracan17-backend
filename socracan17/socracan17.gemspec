@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "oj"
   spec.add_dependency "bunny"
   spec.add_dependency "action_dispatcher"
+  spec.add_dependency "dry-validation"
 
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"
