@@ -22,7 +22,7 @@ post '/services' do
     begin
       result = SocraCan17::Actions.action_dispatcher.execute(jsonrpc_request.method.to_sym, jsonrpc_request.params)
       present(result)
-    rescue ActionDispatcher::ArgumentError
+    rescue ArgumentError
       raise JsonRPC::InvalidParamsError
     rescue ActionDispatcher::ActionNotFoundError
       raise JsonRPC::MethodNotFoundError
